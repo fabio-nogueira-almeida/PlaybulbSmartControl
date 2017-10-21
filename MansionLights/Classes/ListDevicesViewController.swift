@@ -63,6 +63,14 @@ extension ListDevicesViewController: UITableViewDataSource {
 }
 
 extension ListDevicesViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let name = self.devicesName?.object(at: indexPath.row) as? String? {
+            let peripherical = self.bluetoothManager.connect(name!)
+            let viewController = DeviceViewController()
+            viewController.setup(peripherical: peripherical!)
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
 }
 
 extension ListDevicesViewController: BluetoothManagerDelegate {

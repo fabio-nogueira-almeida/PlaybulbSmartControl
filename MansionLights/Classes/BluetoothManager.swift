@@ -13,22 +13,15 @@ protocol BluetoothManagerDelegate {
     func managerDidFoundDevices(devicesNames: NSArray)
 }
 
-protocol BluetoothManagerPeripheralDelegate {
-    
-}
-
 class BluetoothManager: NSObject {
 
     // MARK: - Constants
     let serviceUIID = "FF0D"
-    let colorCharacteristicUIID = "FFFC"
 
     // MARK: - Properties
     var manager: CBCentralManager
     var delegate: BluetoothManagerDelegate?
     var peripherals: NSMutableArray = []
-    var characteristics: [CBCharacteristic]?
-
 
     // MARK: - Initialize
     override init() {
@@ -47,7 +40,21 @@ class BluetoothManager: NSObject {
             self.stopSearchPeripherals()
         }
     }
+    
+    func connect(_ name: String) -> CBPeripheral? {
 
+        guard let peripherals = self.peripherals as? Array<CBPeripheral> else {
+            return nil
+        }
+ 
+        let peripheral = peripherals.filter {$0.name == name}.first
+
+        self.manager.connect(peripheral!,
+                             options: nil)
+        
+        return peripheral
+    }
+    
     // MARK: - Private
     private func cleanPeripherals() {
         self.peripherals = []
@@ -55,6 +62,10 @@ class BluetoothManager: NSObject {
 
     private func stopSearchPeripherals() {
         self.manager.stopScan()
+        self.sendDevicesNamesToDelegator()
+    }
+
+    private func sendDevicesNamesToDelegator() {
         guard let peripherals = self.peripherals as? Array<CBPeripheral> else {
             return
         }
@@ -109,35 +120,3 @@ extension BluetoothManager: CBCentralManagerDelegate {
         }
     }
 }
-
-extension BluetoothManager: CBPeripheralDelegate {
-
-    func peripheral(_ peripheral: CBPeripheral,
-                    didDiscoverCharacteristicsFor service: CBService,
-                    error: Error?) {
-        if let characteristics = service.characteristics {
-            self.characteristics = characteristics
-        }
-    }
-
-    func peripheral(_ peripheral: CBPeripheral,
-                    didDiscoverIncludedServicesFor service: CBService,
-                    error: Error?) {
-        self.manager.scanForPeripherals(withServices: [CBUUID(string: serviceUIID)],
-                                               options: nil)
-    }
-
-}
-//
-//                let peripheral = self.peripherals.firstObject as! CBPeripheral
-//                peripheral.delegate = self
-//                self.centralManager?.connect(peripheral,
-//                                             options: nil)
-//
-//                let data = Data(base64Encoded: "")
-//                peripheral.writeValue(<#T##data: Data##Data#>, for: , type: .withoutResponse)
-//if thisCharacteristic.uuid == CBUUID(string: colorCharacteristicUIID) {
-//    peripheral.writeValue(Data(hex: "0000dd00"),
-//                          for: thisCharacteristic,
-//                          type: .withoutResponse)
-//}
