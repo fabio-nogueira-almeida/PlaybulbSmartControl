@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,17 +15,17 @@
 /* Begin PBXFileReference section */
 		13CFB573891A61E04E1BFB94E5B8EF9D /* Pods-MansionLights-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MansionLights-frameworks.sh"; sourceTree = "<group>"; };
 		3241B0BAB2E3A965F40B2C40B33F857C /* Pods-MansionLights-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MansionLights-umbrella.h"; sourceTree = "<group>"; };
-		64CAE0F0999E1C4A15407F6D0347FABA /* Pods-MansionLights.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-MansionLights.modulemap"; sourceTree = "<group>"; };
+		64CAE0F0999E1C4A15407F6D0347FABA /* Pods-MansionLights.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-MansionLights.modulemap"; sourceTree = "<group>"; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		6BCAF4105E0983A67151ABE052CB9399 /* Pods-MansionLights-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MansionLights-resources.sh"; sourceTree = "<group>"; };
 		72D3E19410959D3E3E09E0A9EF807BD5 /* Pods-MansionLights.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MansionLights.release.xcconfig"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		B50A42D492F01E565B74E301FED3E00D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C965ADCF636E62524C1EAEC1E95EA07F /* Pods-MansionLights-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MansionLights-acknowledgements.markdown"; sourceTree = "<group>"; };
 		CDE14014799DDE68C70DB98521CE31CC /* Pods-MansionLights.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MansionLights.debug.xcconfig"; sourceTree = "<group>"; };
 		DACB9D6E2385E314A03E3F34612E0FD1 /* Pods-MansionLights-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MansionLights-dummy.m"; sourceTree = "<group>"; };
 		DB9F3CDAA2E6821EB4B1919794D755AE /* Pods-MansionLights-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MansionLights-acknowledgements.plist"; sourceTree = "<group>"; };
-		FA9DA377FE45CF1957281FC9E99F109E /* Pods_MansionLights.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_MansionLights.framework; path = "Pods-MansionLights.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA9DA377FE45CF1957281FC9E99F109E /* Pods_MansionLights.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MansionLights.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +44,6 @@
 			isa = PBXGroup;
 			children = (
 			);
-			name = SwiftLint;
 			path = SwiftLint;
 			sourceTree = "<group>";
 		};
@@ -155,7 +154,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0900;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";

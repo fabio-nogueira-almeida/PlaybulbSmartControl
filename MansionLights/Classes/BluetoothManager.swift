@@ -9,22 +9,64 @@
 import UIKit
 import CoreBluetooth
 
-class BluetoothManager: NSObject {
-
-// MARK: - Properties
-
-    var centralManager: CBCentralManager!
-    var peripherals: NSMutableArray = []
-
+protocol BluetoothManagerDelegate {
+    func managerDidFoundDevices(devicesNames: NSArray)
 }
 
-// MARK: - CBCentralManagerDelegate
+protocol BluetoothManagerPeripheralDelegate {
+    
+}
 
+class BluetoothManager: NSObject {
+
+    // MARK: - Constants
+    let serviceUIID = "FF0D"
+    let colorCharacteristicUIID = "FFFC"
+
+    // MARK: - Properties
+    var manager: CBCentralManager
+    var delegate: BluetoothManagerDelegate?
+    var peripherals: NSMutableArray = []
+    var characteristics: [CBCharacteristic]?
+
+
+    // MARK: - Initialize
+    override init() {
+        self.manager = CBCentralManager(delegate: nil,
+                                               queue: nil)
+        super.init()
+        self.manager.delegate = self
+    }
+
+    // MARK: - Public
+    func startSearchDevices() {
+        self.cleanPeripherals()
+        self.manager.scanForPeripherals(withServices: [CBUUID(string: serviceUIID)],
+                                               options: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.stopSearchPeripherals()
+        }
+    }
+
+    // MARK: - Private
+    private func cleanPeripherals() {
+        self.peripherals = []
+    }
+
+    private func stopSearchPeripherals() {
+        self.manager.stopScan()
+        guard let peripherals = self.peripherals as? Array<CBPeripheral> else {
+            return
+        }
+
+        let devicesNames = peripherals.map {$0.name}
+        self.delegate?.managerDidFoundDevices(devicesNames: devicesNames as NSArray)
+    }
+}
+
+    // MARK: - CBCentralManagerDelegate
 extension BluetoothManager: CBCentralManagerDelegate {
-   
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        print(central.state)
-
         switch central.state {
 
         case .poweredOff:
@@ -32,25 +74,11 @@ extension BluetoothManager: CBCentralManagerDelegate {
 
         case .poweredOn:
             print("BLE Powered ON")
-            central.scanForPeripherals(withServices: [CBUUID(string: "FF0D")],
-                                       options: nil)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                self.centralManager?.stopScan()
-
-
-                let peripheral = self.peripherals.firstObject as! CBPeripheral
-                peripheral.delegate = self
-                self.centralManager?.connect(peripheral,
-                                             options: nil)
-
-                //                let data = Data(base64Encoded: "")
-                //                peripheral.writeValue(<#T##data: Data##Data#>, for: , type: .withoutResponse)
-                
-            }
+            self.startSearchDevices()
 
         case .resetting:
             print("BLE Resetting")
-            
+
         case .unauthorized:
             print("BEL Not Authorized")
 
@@ -61,33 +89,23 @@ extension BluetoothManager: CBCentralManagerDelegate {
             print("not supported")
         }
     }
-    
+
     func centralManager(_ central: CBCentralManager,
                         didDiscover peripheral: CBPeripheral,
-                        advertisementData: [String : Any],
+                        advertisementData: [String: Any],
                         rssi RSSI: NSNumber) {
         self.peripherals.add(peripheral)
     }
 
     func centralManager(_ central: CBCentralManager,
-                        didFailToConnect peripheral: CBPeripheral,
-                        error: Error?) {
-
-    }
-
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        //        peripheral.writeValue(<#T##data: Data##Data#>, for: <#T##CBCharacteristic#>, type: <#T##CBCharacteristicWriteType#>)
+                        didConnect peripheral: CBPeripheral) {
         peripheral.discoverServices(nil)
     }
 
     func peripheral(_ peripheral: CBPeripheral,
                     didDiscoverServices error: Error?) {
         for service in peripheral.services! {
-            let thisService = service as CBService
-            
-            //            if service.UUID == BEAN_SERVICE_UUID {
-            peripheral.discoverCharacteristics(nil, for: thisService)
-            //            }
+            peripheral.discoverCharacteristics(nil, for: service)
         }
     }
 }
@@ -97,31 +115,29 @@ extension BluetoothManager: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral,
                     didDiscoverCharacteristicsFor service: CBService,
                     error: Error?) {
-        for characteristic in service.characteristics! {
-            let thisCharacteristic = characteristic as CBCharacteristic
-            //            print(thisCharacteristic)
-            
-            if thisCharacteristic.uuid == CBUUID(string: "FFFC") {
-                peripheral.writeValue(Data(hex: "0000dd00"),
-                                      for: thisCharacteristic,
-                                      type: .withoutResponse)
-            }
-            
-            //            if thisCharacteristic.UUID == BEAN_SCRATCH_UUID {
-            //                self.peripheral.setNotifyValue(
-            //                    true,
-            //                    forCharacteristic: thisCharacteristic
-            //                )
-            //            }
-            //        }
+        if let characteristics = service.characteristics {
+            self.characteristics = characteristics
         }
     }
 
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverIncludedServicesFor service: CBService, error: Error?) {
-        self.centralManager.scanForPeripherals(withServices: [CBUUID(string: "FF0D")],
+    func peripheral(_ peripheral: CBPeripheral,
+                    didDiscoverIncludedServicesFor service: CBService,
+                    error: Error?) {
+        self.manager.scanForPeripherals(withServices: [CBUUID(string: serviceUIID)],
                                                options: nil)
     }
 
 }
-
-
+//
+//                let peripheral = self.peripherals.firstObject as! CBPeripheral
+//                peripheral.delegate = self
+//                self.centralManager?.connect(peripheral,
+//                                             options: nil)
+//
+//                let data = Data(base64Encoded: "")
+//                peripheral.writeValue(<#T##data: Data##Data#>, for: , type: .withoutResponse)
+//if thisCharacteristic.uuid == CBUUID(string: colorCharacteristicUIID) {
+//    peripheral.writeValue(Data(hex: "0000dd00"),
+//                          for: thisCharacteristic,
+//                          type: .withoutResponse)
+//}
