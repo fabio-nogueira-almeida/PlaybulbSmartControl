@@ -24,6 +24,13 @@ class DeviceViewController: UIViewController {
     // MARK - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let backBarButtonItem = UIBarButtonItem(image: UIImage(named: "ARROW ICON"),
+                                                style: .plain,
+                                                target: nil,
+                                                action: nil)
+        self.navigationItem.leftBarButtonItem = backBarButtonItem
+        
         self.view.backgroundColor = UIColor.white
         
         let desligarButton = UIButton(type: .system)
