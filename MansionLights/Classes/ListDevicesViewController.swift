@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreBluetooth
 
 class ListDevicesViewController: UIViewController {
 
@@ -68,6 +69,12 @@ class ListDevicesViewController: UIViewController {
     private func addRefreshBarButtonItem() {
         self.navigationItem.setRightBarButton(self.refreshBarButtonItem(),
                                               animated: true)
+    }
+
+    private func presentDeviceViewController(peripherical: CBPeripheral) {
+        let viewController = DeviceViewController()
+        viewController.setup(peripherical: peripherical)
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 
     // MARK: - Actions
@@ -151,11 +158,9 @@ extension ListDevicesViewController: UITableViewDataSource {
 extension ListDevicesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
-        if let name = self.devicesName?.object(at: indexPath.row) as? String? {
-            let peripherical = self.bluetoothManager.connect(name!)
-            let viewController = DeviceViewController()
-            viewController.setup(peripherical: peripherical!)
-            self.navigationController?.pushViewController(viewController, animated: true)
+        if let name = self.devicesName?.object(at: indexPath.row) as? String?,
+            let peripherical = self.bluetoothManager.connect(name!) {
+           self.presentDeviceViewController(peripherical: peripherical)
         }
     }
 }
