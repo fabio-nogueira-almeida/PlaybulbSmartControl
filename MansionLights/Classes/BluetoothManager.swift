@@ -9,7 +9,7 @@
 import UIKit
 import CoreBluetooth
 
-protocol BluetoothManagerDelegate {
+protocol BluetoothManagerDelegate: class {
     func managerDidFoundDevices(devicesNames: NSArray)
 }
 
@@ -20,13 +20,14 @@ class BluetoothManager: NSObject {
 
     // MARK: - Properties
     var manager: CBCentralManager
-    var delegate: BluetoothManagerDelegate?
+    weak var delegate: BluetoothManagerDelegate?
     var peripherals: NSMutableArray = []
+    var peripheralConnected: CBPeripheral?
 
     // MARK: - Initialize
     override init() {
         self.manager = CBCentralManager(delegate: nil,
-                                               queue: nil)
+                                        queue: nil)
         super.init()
         self.manager.delegate = self
     }
@@ -40,21 +41,30 @@ class BluetoothManager: NSObject {
             self.stopSearchPeripherals()
         }
     }
-    
+
     func connect(_ name: String) -> CBPeripheral? {
 
         guard let peripherals = self.peripherals as? Array<CBPeripheral> else {
             return nil
         }
- 
-        let peripheral = peripherals.filter {$0.name == name}.first
 
-        self.manager.connect(peripheral!,
-                             options: nil)
-        
-        return peripheral
+        if let peripheral = (peripherals.filter {$0.name == name}.first) {
+            self.manager.connect(peripheral,
+                                 options: nil)
+            self.peripheralConnected = peripheral
+            return peripheral
+        }
+
+        return nil
     }
-    
+
+    func desconnect() {
+        if let peripheral = self.peripheralConnected {
+            self.manager.cancelPeripheralConnection(peripheral)
+            self.peripheralConnected = nil
+        }
+    }
+
     // MARK: - Private
     private func cleanPeripherals() {
         self.peripherals = []
@@ -105,7 +115,9 @@ extension BluetoothManager: CBCentralManagerDelegate {
                         didDiscover peripheral: CBPeripheral,
                         advertisementData: [String: Any],
                         rssi RSSI: NSNumber) {
-        self.peripherals.add(peripheral)
+        if !self.peripherals.contains(peripheral) {
+            self.peripherals.add(peripheral)
+        }
     }
 
     func centralManager(_ central: CBCentralManager,

@@ -9,14 +9,11 @@
 import UIKit
 import CoreBluetooth
 
-protocol BluetoothManagerPeripheralDelegate {
-}
-
 class BluetoothPeriphericalManager: NSObject {
 
     // MARK: - Constants
     let colorCharacteristicUIID = "FFFC"
-    
+
     // MARK: - Properties
     var peripherical: CBPeripheral
     var characteristics: NSMutableArray = []
@@ -25,29 +22,32 @@ class BluetoothPeriphericalManager: NSObject {
     init(peripherical: CBPeripheral) {
         self.peripherical = peripherical
     }
-    
+
     // MARK: - Public
-    
+
     func setup() {
         self.peripherical.delegate = self
         self.peripherical.discoverServices(nil)
     }
-    
+
     func powerOn() {
         self.changeColor(colorHex: "ff000000")
     }
-    
+
     func powerOff() {
         self.changeColor(colorHex: "00000000")
     }
-    
+
+    func desconect() {
+    }
+
     // MARK: - Private
-    
+
     private func colorCharacteristic() -> CBCharacteristic {
         let array = self.characteristics as? [CBCharacteristic]
         return (array!.filter {$0.uuid == CBUUID(string: colorCharacteristicUIID)}.first)!
     }
-    
+
     private func changeColor(colorHex: String) {
         self.peripherical.writeValue(Data(hex: colorHex),
                                      for: self.colorCharacteristic(),
@@ -56,14 +56,15 @@ class BluetoothPeriphericalManager: NSObject {
 }
 
 extension BluetoothPeriphericalManager: CBPeripheralDelegate {
-    
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+
+    func peripheral(_ peripheral: CBPeripheral,
+                    didDiscoverServices error: Error?) {
         for service in peripheral.services! {
             let thisService = service as CBService
             peripheral.discoverCharacteristics(nil, for: thisService)
         }
     }
-    
+
     func peripheral(_ peripheral: CBPeripheral,
                     didDiscoverCharacteristicsFor service: CBService,
                     error: Error?) {
@@ -72,4 +73,3 @@ extension BluetoothPeriphericalManager: CBPeripheralDelegate {
         }
     }
 }
-

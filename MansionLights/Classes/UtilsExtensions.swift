@@ -9,7 +9,7 @@
 import UIKit
 
 extension Data {
-    init(hex:String) {
+    init(hex: String) {
         let scalars = hex.unicodeScalars
         var bytes = Array<UInt8>(repeating: 0, count: (scalars.count + 1) >> 1)
         for (index, scalar) in scalars.enumerated() {
@@ -24,15 +24,13 @@ extension Data {
 }
 
 extension UnicodeScalar {
-    var hexNibble:UInt8 {
+    var hexNibble: UInt8 {
         let value = self.value
         if 48 <= value && value <= 57 {
             return UInt8(value - 48)
-        }
-        else if 65 <= value && value <= 70 {
+        } else if 65 <= value && value <= 70 {
             return UInt8(value - 55)
-        }
-        else if 97 <= value && value <= 102 {
+        } else if 97 <= value && value <= 102 {
             return UInt8(value - 87)
         }
         fatalError("\(self) not a legal hex nibble")
@@ -41,18 +39,18 @@ extension UnicodeScalar {
 
 extension UIColor {
     var toHexString: String {
-        var r: CGFloat = 0
-        var g: CGFloat = 0
-        var b: CGFloat = 0
-        var a: CGFloat = 0
-        
-        self.getRed(&r, green: &g, blue: &b, alpha: &a)
-        
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+
+        self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+
         return String(
             format: "%02X%02X%02X",
-            Int(r * 0xff),
-            Int(g * 0xff),
-            Int(b * 0xff)
+            Int(red * 0xff),
+            Int(green * 0xff),
+            Int(blue * 0xff)
         )
     }
 
@@ -67,7 +65,7 @@ extension UIColor {
         let color = UIColor(red: red, green: green, blue: blue, alpha: CGFloat(alpha))
         return color
     }
-    
+
     func intFromHexString(hexStr: String) -> UInt32 {
         var hexInt: UInt32 = 0
         // Create scanner
@@ -79,4 +77,3 @@ extension UIColor {
         return hexInt
     }
 }
-

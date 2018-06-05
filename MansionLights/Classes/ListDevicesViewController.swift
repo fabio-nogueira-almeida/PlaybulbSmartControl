@@ -18,7 +18,7 @@ class ListDevicesViewController: UIViewController {
     // MARK: - Properties
 
     private let bluetoothManager = BluetoothManager()
-    private var devicesName: NSArray?
+    private var model: NSArray?
 
     // MARK: - Properties Lazy
 
@@ -44,7 +44,9 @@ class ListDevicesViewController: UIViewController {
         self.addProtocols()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
+        self.bluetoothManager.desconnect()
+        self.tableView.reloadData()
         startRefreshAction()
     }
 
@@ -121,8 +123,8 @@ extension ListDevicesViewController {
 extension ListDevicesViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         var numberOfSection = 1
-        if (self.devicesName == nil) &&
-            (self.devicesName?.count == 0) {
+        if (self.model == nil) &&
+            (self.model?.count == 0) {
             emptyMessage(message: "parece que elas estao desligadas \n\n 💡 😭",
                          tableView: tableView)
             numberOfSection = 0
@@ -132,7 +134,7 @@ extension ListDevicesViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let numberOfRows = self.devicesName?.count {
+        if let numberOfRows = self.model?.count {
             return numberOfRows
         }
         return 0
@@ -141,7 +143,7 @@ extension ListDevicesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        if let name = self.devicesName?.object(at: indexPath.row) as? String? {
+        if let name = self.model?.object(at: indexPath.row) as? String? {
             cell.textLabel?.text = name
         }
         self.cellLayoutConfiguration(cell)
@@ -158,8 +160,8 @@ extension ListDevicesViewController: UITableViewDataSource {
 extension ListDevicesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
-        if let name = self.devicesName?.object(at: indexPath.row) as? String?,
-            let peripherical = self.bluetoothManager.connect(name!) {
+        if let model = self.model?.object(at: indexPath.row) as? String?,
+            let peripherical = self.bluetoothManager.connect(model!) {
            self.presentDeviceViewController(peripherical: peripherical)
         }
     }
@@ -168,7 +170,7 @@ extension ListDevicesViewController: UITableViewDelegate {
     // MARK: - BluetoothManagerDelegate
 extension ListDevicesViewController: BluetoothManagerDelegate {
     func managerDidFoundDevices(devicesNames: NSArray) {
-        self.devicesName = devicesNames
+        self.model = devicesNames
         self.tableView.reloadData()
         self.stopRefreshAction()
     }

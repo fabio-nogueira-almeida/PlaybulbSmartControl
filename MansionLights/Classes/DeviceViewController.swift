@@ -14,42 +14,42 @@ class DeviceViewController: UIViewController {
     // MARK: Properties
     var bluetoothPeriphericalManager: BluetoothPeriphericalManager?
 
-    // MARK - Initialize
+    // MARK: - Initialize
     func setup(peripherical: CBPeripheral) {
         self.bluetoothPeriphericalManager =
             BluetoothPeriphericalManager(peripherical: peripherical)
         self.bluetoothPeriphericalManager?.setup()
     }
-    
-    // MARK - Lifecycle
+
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    }
+
+    // MARK: Private
+
+    private func addBackBarButtonItem() {
         let backBarButtonItem = UIBarButtonItem(image: UIImage(named: "ARROW ICON"),
                                                 style: .plain,
-                                                target: nil,
-                                                action: nil)
+                                                target: self,
+                                                action: #selector(self.popViewController))
         self.navigationItem.leftBarButtonItem = backBarButtonItem
-        
-        self.view.backgroundColor = UIColor.white
-        
-        let desligarButton = UIButton(type: .system)
-        desligarButton.frame = CGRect(x: 10, y: 100, width: 100, height: 100)
-        desligarButton.setTitle("Desligar", for: .normal)
-        desligarButton.addTarget(self, action: #selector(desligarAction), for: .touchUpInside)
-        self.view.addSubview(desligarButton)
-        
-        let ligarButton = UIButton(type: .system)
-        ligarButton.frame = CGRect(x: 10, y: 200, width: 100, height: 100)
-        ligarButton.setTitle("Ligar", for: .normal)
-        ligarButton.addTarget(self, action: #selector(ligarAction), for: .touchUpInside)
-        self.view.addSubview(ligarButton)
     }
-    
+
+    private func addViewLayout() {
+        self.view.backgroundColor = UIColor.white
+    }
+
+    // MARK: Actions
+
+    @objc func popViewController() {
+        self.navigationController?.popViewController(animated: true)
+    }
+
     @objc func desligarAction() {
         self.bluetoothPeriphericalManager?.powerOff()
     }
-    
+
     @objc func ligarAction() {
         self.bluetoothPeriphericalManager?.powerOn()
     }
