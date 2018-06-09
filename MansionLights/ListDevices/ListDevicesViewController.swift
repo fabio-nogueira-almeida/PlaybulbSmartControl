@@ -115,7 +115,7 @@ extension ListDevicesViewController: ListDevicesActionsProtocol {
         bluetoothManager.startSearchDevices()
         navigationItem.rightBarButtonItem?.customView = refreshIndicatorView()
     }
-    
+
     internal func stopRefreshAction() {
         addRefreshBarButtonItem()
     }

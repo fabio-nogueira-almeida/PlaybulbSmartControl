@@ -24,16 +24,16 @@ protocol BluetoothPeriphericalManagerProtocol {
 class BluetoothPeriphericalManager: NSObject {
 
     // MARK: - Constants
-    
+
     let colorCharacteristicUIID = "FFFC"
 
     // MARK: - Properties
-    
+
     var peripherical: CBPeripheral
     var characteristics: NSMutableArray = []
 
     // MARK: - Initialize
-    
+
     init(peripherical: CBPeripheral) {
         self.peripherical = peripherical
     }

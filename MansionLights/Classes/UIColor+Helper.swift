@@ -22,7 +22,7 @@ extension UIColor: hexadecimalFormatProtocol {
         var alpha: CGFloat = 0
 
         self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
- 
+
         return String(
             format: "%02X%02X%02X",
             Int(red * 0xff),

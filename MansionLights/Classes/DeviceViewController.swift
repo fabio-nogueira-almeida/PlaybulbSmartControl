@@ -23,11 +23,11 @@ protocol DeviceActionsProtocol {
 class DeviceViewController: UIViewController {
 
     // MARK: Properties
-    
+
     var bluetoothPeriphericalManager: BluetoothPeriphericalManager?
 
     // MARK: - Initialize
-    
+
     func setup(peripherical: CBPeripheral) {
         self.bluetoothPeriphericalManager =
             BluetoothPeriphericalManager(peripherical: peripherical)
@@ -35,7 +35,7 @@ class DeviceViewController: UIViewController {
     }
 
     // MARK: - Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -51,7 +51,7 @@ extension DeviceViewController: DeviceLayoutProtocol {
                                                 action: #selector(self.goToInitialScreen))
         self.navigationItem.leftBarButtonItem = backBarButtonItem
     }
-    
+
     internal func addViewLayout() {
         self.view.backgroundColor = UIColor.white
     }
@@ -63,11 +63,11 @@ extension DeviceViewController: DeviceActionsProtocol {
     @objc internal func goToInitialScreen() {
         self.navigationController?.popViewController(animated: true)
     }
-    
+
     @objc internal func desligarAction() {
         self.bluetoothPeriphericalManager?.powerOff()
     }
-    
+
     @objc internal func ligarAction() {
         self.bluetoothPeriphericalManager?.powerOn()
     }
