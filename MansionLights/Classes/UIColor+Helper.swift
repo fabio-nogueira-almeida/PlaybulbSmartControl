@@ -8,44 +8,21 @@
 
 import UIKit
 
-extension Data {
-    init(hex: String) {
-        let scalars = hex.unicodeScalars
-        var bytes = Array<UInt8>(repeating: 0, count: (scalars.count + 1) >> 1)
-        for (index, scalar) in scalars.enumerated() {
-            var nibble = scalar.hexNibble
-            if index & 1 == 0 {
-                nibble <<= 4
-            }
-            bytes[index >> 1] |= nibble
-        }
-        self = Data(bytes: bytes)
-    }
+protocol hexadecimalFormatProtocol {
+    var hex: String { get }
+    func hexToColor(hexString: String) -> UIColor
+    func intFromHexString(hexStr: String) -> UInt32
 }
 
-extension UnicodeScalar {
-    var hexNibble: UInt8 {
-        let value = self.value
-        if 48 <= value && value <= 57 {
-            return UInt8(value - 48)
-        } else if 65 <= value && value <= 70 {
-            return UInt8(value - 55)
-        } else if 97 <= value && value <= 102 {
-            return UInt8(value - 87)
-        }
-        fatalError("\(self) not a legal hex nibble")
-    }
-}
-
-extension UIColor {
-    var toHexString: String {
+extension UIColor: hexadecimalFormatProtocol {
+    var hex: String {
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
         var alpha: CGFloat = 0
 
         self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-
+ 
         return String(
             format: "%02X%02X%02X",
             Int(red * 0xff),

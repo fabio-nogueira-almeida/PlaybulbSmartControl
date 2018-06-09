@@ -9,16 +9,31 @@
 import UIKit
 import CoreBluetooth
 
+protocol BluetoothPeriphericalManagerAPIProtocol {
+    func powerOn()
+    func powerOff()
+    func redColor()
+    func readColor()
+}
+
+protocol BluetoothPeriphericalManagerProtocol {
+    func colorCharacteristic() -> CBCharacteristic
+    func changeColor(colorHex: String)
+}
+
 class BluetoothPeriphericalManager: NSObject {
 
     // MARK: - Constants
+    
     let colorCharacteristicUIID = "FFFC"
 
     // MARK: - Properties
+    
     var peripherical: CBPeripheral
     var characteristics: NSMutableArray = []
 
     // MARK: - Initialize
+    
     init(peripherical: CBPeripheral) {
         self.peripherical = peripherical
     }
@@ -29,31 +44,9 @@ class BluetoothPeriphericalManager: NSObject {
         self.peripherical.delegate = self
         self.peripherical.discoverServices(nil)
     }
-
-    func powerOn() {
-        self.changeColor(colorHex: "ff000000")
-    }
-
-    func powerOff() {
-        self.changeColor(colorHex: "00000000")
-    }
-
-    func desconect() {
-    }
-
-    // MARK: - Private
-
-    private func colorCharacteristic() -> CBCharacteristic {
-        let array = self.characteristics as? [CBCharacteristic]
-        return (array!.filter {$0.uuid == CBUUID(string: colorCharacteristicUIID)}.first)!
-    }
-
-    private func changeColor(colorHex: String) {
-        self.peripherical.writeValue(Data(hex: colorHex),
-                                     for: self.colorCharacteristic(),
-                                     type: .withoutResponse)
-    }
 }
+
+// MARK: CBPeripheralDelegate
 
 extension BluetoothPeriphericalManager: CBPeripheralDelegate {
 
@@ -72,4 +65,32 @@ extension BluetoothPeriphericalManager: CBPeripheralDelegate {
             self.characteristics.add(characteristic)
         }
     }
+}
+
+// MARK: BluetoothPeriphericalManagerAPIProtocol
+
+extension BluetoothPeriphericalManager: BluetoothPeriphericalManagerAPIProtocol {
+    func powerOn() {
+        changeColor(colorHex: UIColor.white.hex)
+    }
+
+    func powerOff() {
+        changeColor(colorHex: UIColor.black.hex)
+    }
+}
+
+// MARK: BluetoothPeriphericalManagerProtocol
+
+extension BluetoothPeriphericalManager: BluetoothPeriphericalManagerProtocol {
+    func colorCharacteristic() -> CBCharacteristic {
+        let array = self.characteristics as? [CBCharacteristic]
+        return (array!.filter {$0.uuid == CBUUID(string: colorCharacteristicUIID)}.first)!
+    }
+
+    func changeColor(colorHex: String) {
+        self.peripherical.writeValue(Data(hex: colorHex),
+                                     for: self.colorCharacteristic(),
+                                     type: .withoutResponse)
+    }
+
 }

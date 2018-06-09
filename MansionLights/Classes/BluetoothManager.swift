@@ -85,7 +85,7 @@ class BluetoothManager: NSObject {
     }
 }
 
-    // MARK: - CBCentralManagerDelegate
+// MARK: - CBCentralManagerDelegate
 extension BluetoothManager: CBCentralManagerDelegate {
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {

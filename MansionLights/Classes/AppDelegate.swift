@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol AppDelegateLayoutProtocol {
+    func navigationBarLayout()
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -17,11 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions
         launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        // TODO: extrair
-        UINavigationBar.appearance().barTintColor = UIColor().hexToColor(hexString: "15161D")
-        UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationBarLayout()
 
         return true
     }
@@ -39,5 +39,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
+    }
+}
+
+extension AppDelegate: AppDelegateLayoutProtocol {
+    func navigationBarLayout() {
+        UINavigationBar.appearance().barTintColor = UIColor().hexToColor(hexString: "15161D")
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
 }

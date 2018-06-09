@@ -9,9 +9,13 @@
 /* Begin PBXBuildFile section */
 		6BD71872DC9C1BF64BCBE419 /* Pods_MansionLights.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53B4F7A04EB709E962CD7AAE /* Pods_MansionLights.framework */; };
 		D91219511F9B80B000FD967A /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91219501F9B80B000FD967A /* BluetoothManager.swift */; };
-		D91219531F9B817B00FD967A /* UtilsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91219521F9B817B00FD967A /* UtilsExtensions.swift */; };
+		D91219531F9B817B00FD967A /* UIColor+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91219521F9B817B00FD967A /* UIColor+Helper.swift */; };
 		D91219581F9B829D00FD967A /* ListDevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91219571F9B829D00FD967A /* ListDevicesViewController.swift */; };
 		D92883C01F997E9A00BBA134 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9E20C561F981D9400887249 /* CoreBluetooth.framework */; };
+		D9C46E9E20CC80D0008B3B6C /* ListDevicesViewController+BluetoothProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C46E9D20CC80D0008B3B6C /* ListDevicesViewController+BluetoothProtocols.swift */; };
+		D9C46EA020CC80F7008B3B6C /* ListDeviceViewController+TableViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C46E9F20CC80F7008B3B6C /* ListDeviceViewController+TableViewProtocols.swift */; };
+		D9C4CF9A20C70FC9004DBDAA /* UnicodeScalar+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C4CF9920C70FC9004DBDAA /* UnicodeScalar+Helper.swift */; };
+		D9C4CF9C20C71005004DBDAA /* Data+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C4CF9B20C71005004DBDAA /* Data+Helper.swift */; };
 		D9CB40021F9BA2CE00172EB0 /* DeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CB40011F9BA2CE00172EB0 /* DeviceViewController.swift */; };
 		D9CB40041F9BA3AE00172EB0 /* BluetoothPeriphericalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CB40031F9BA3AE00172EB0 /* BluetoothPeriphericalManager.swift */; };
 		D9E20C441F981CFF00887249 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9E20C431F981CFF00887249 /* AppDelegate.swift */; };
@@ -38,8 +42,12 @@
 		53B4F7A04EB709E962CD7AAE /* Pods_MansionLights.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MansionLights.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AFBE1CF3A5ADF0351D41124 /* Pods-MansionLights.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MansionLights.release.xcconfig"; path = "Pods/Target Support Files/Pods-MansionLights/Pods-MansionLights.release.xcconfig"; sourceTree = "<group>"; };
 		D91219501F9B80B000FD967A /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
-		D91219521F9B817B00FD967A /* UtilsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsExtensions.swift; sourceTree = "<group>"; };
+		D91219521F9B817B00FD967A /* UIColor+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Helper.swift"; sourceTree = "<group>"; };
 		D91219571F9B829D00FD967A /* ListDevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDevicesViewController.swift; sourceTree = "<group>"; };
+		D9C46E9D20CC80D0008B3B6C /* ListDevicesViewController+BluetoothProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListDevicesViewController+BluetoothProtocols.swift"; sourceTree = "<group>"; };
+		D9C46E9F20CC80F7008B3B6C /* ListDeviceViewController+TableViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListDeviceViewController+TableViewProtocols.swift"; sourceTree = "<group>"; };
+		D9C4CF9920C70FC9004DBDAA /* UnicodeScalar+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnicodeScalar+Helper.swift"; sourceTree = "<group>"; };
+		D9C4CF9B20C71005004DBDAA /* Data+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Helper.swift"; sourceTree = "<group>"; };
 		D9CB40011F9BA2CE00172EB0 /* DeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceViewController.swift; sourceTree = "<group>"; };
 		D9CB40031F9BA3AE00172EB0 /* BluetoothPeriphericalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPeriphericalManager.swift; sourceTree = "<group>"; };
 		D9E20C401F981CFF00887249 /* MansionLights.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MansionLights.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,10 +88,21 @@
 				D91219501F9B80B000FD967A /* BluetoothManager.swift */,
 				D9CB40031F9BA3AE00172EB0 /* BluetoothPeriphericalManager.swift */,
 				D9CB40011F9BA2CE00172EB0 /* DeviceViewController.swift */,
-				D91219571F9B829D00FD967A /* ListDevicesViewController.swift */,
-				D91219521F9B817B00FD967A /* UtilsExtensions.swift */,
+				D91219521F9B817B00FD967A /* UIColor+Helper.swift */,
+				D9C4CF9920C70FC9004DBDAA /* UnicodeScalar+Helper.swift */,
+				D9C4CF9B20C71005004DBDAA /* Data+Helper.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		D9C46EA120CC848E008B3B6C /* ListDevices */ = {
+			isa = PBXGroup;
+			children = (
+				D91219571F9B829D00FD967A /* ListDevicesViewController.swift */,
+				D9C46E9D20CC80D0008B3B6C /* ListDevicesViewController+BluetoothProtocols.swift */,
+				D9C46E9F20CC80F7008B3B6C /* ListDeviceViewController+TableViewProtocols.swift */,
+			);
+			path = ListDevices;
 			sourceTree = "<group>";
 		};
 		D9E20C371F981CFE00887249 = {
@@ -107,6 +126,7 @@
 		D9E20C421F981CFF00887249 /* MansionLights */ = {
 			isa = PBXGroup;
 			children = (
+				D9C46EA120CC848E008B3B6C /* ListDevices */,
 				D91219541F9B81AE00FD967A /* Classes */,
 				D9E20C4F1F981CFF00887249 /* Info.plist */,
 				D9E20C4A1F981CFF00887249 /* Assets.xcassets */,
@@ -273,8 +293,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D91219581F9B829D00FD967A /* ListDevicesViewController.swift in Sources */,
-				D91219531F9B817B00FD967A /* UtilsExtensions.swift in Sources */,
+				D91219531F9B817B00FD967A /* UIColor+Helper.swift in Sources */,
+				D9C4CF9A20C70FC9004DBDAA /* UnicodeScalar+Helper.swift in Sources */,
+				D9C46E9E20CC80D0008B3B6C /* ListDevicesViewController+BluetoothProtocols.swift in Sources */,
 				D9CB40021F9BA2CE00172EB0 /* DeviceViewController.swift in Sources */,
+				D9C4CF9C20C71005004DBDAA /* Data+Helper.swift in Sources */,
+				D9C46EA020CC80F7008B3B6C /* ListDeviceViewController+TableViewProtocols.swift in Sources */,
 				D91219511F9B80B000FD967A /* BluetoothManager.swift in Sources */,
 				D9CB40041F9BA3AE00172EB0 /* BluetoothPeriphericalManager.swift in Sources */,
 				D9E20C441F981CFF00887249 /* AppDelegate.swift in Sources */,
