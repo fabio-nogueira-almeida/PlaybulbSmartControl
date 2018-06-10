@@ -12,8 +12,6 @@ import CoreBluetooth
 protocol BluetoothPeriphericalManagerAPIProtocol {
     func powerOn()
     func powerOff()
-    func redColor()
-    func readColor()
 }
 
 protocol BluetoothPeriphericalManagerProtocol {

@@ -16,15 +16,18 @@ protocol BluetoothManagerDelegate: class {
 class BluetoothManager: NSObject {
 
     // MARK: - Constants
+    
     let serviceUIID = "FF0D"
 
     // MARK: - Properties
+    
     var manager: CBCentralManager
     weak var delegate: BluetoothManagerDelegate?
     var peripherals: NSMutableArray = []
     var peripheralConnected: CBPeripheral?
 
     // MARK: - Initialize
+    
     override init() {
         self.manager = CBCentralManager(delegate: nil,
                                         queue: nil)
@@ -33,6 +36,7 @@ class BluetoothManager: NSObject {
     }
 
     // MARK: - Public
+    
     func startSearchDevices() {
         self.cleanPeripherals()
         self.manager.scanForPeripherals(withServices: [CBUUID(string: serviceUIID)],
@@ -42,20 +46,17 @@ class BluetoothManager: NSObject {
         }
     }
 
-    func connect(_ name: String) -> CBPeripheral? {
+    func connect(_ name: String) -> CBPeripheral {
 
-        guard let peripherals = self.peripherals as? Array<CBPeripheral> else {
-            return nil
+        guard let peripherals = self.peripherals as? Array<CBPeripheral>,
+            let peripheral = (peripherals.filter {$0.name == name}.first) else{
+            fatalError("no peripheral founded")
         }
-
-        if let peripheral = (peripherals.filter {$0.name == name}.first) {
-            self.manager.connect(peripheral,
-                                 options: nil)
-            self.peripheralConnected = peripheral
-            return peripheral
-        }
-
-        return nil
+        
+        self.manager.connect(peripheral,
+                             options: nil)
+        self.peripheralConnected = peripheral
+        return peripheral
     }
 
     func desconnect() {
@@ -66,6 +67,7 @@ class BluetoothManager: NSObject {
     }
 
     // MARK: - Private
+    
     private func cleanPeripherals() {
         self.peripherals = []
     }
@@ -86,6 +88,7 @@ class BluetoothManager: NSObject {
 }
 
 // MARK: - CBCentralManagerDelegate
+
 extension BluetoothManager: CBCentralManagerDelegate {
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {

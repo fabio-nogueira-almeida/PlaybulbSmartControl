@@ -16,9 +16,16 @@ protocol DeviceLayoutProtocol {
 
 protocol DeviceActionsProtocol {
     func goToInitialScreen()
-    func desligarAction()
-    func ligarAction()
+    func turnOff()
+    func turnOn()
 }
+
+// TODO: Add datasource with lines of options,
+// TODO: turn on,
+// TODO: turn off,
+// TODO: red color,
+// TODO: read color,
+// TODO: opacity
 
 class DeviceViewController: UIViewController {
 
@@ -38,6 +45,12 @@ class DeviceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        addViewLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super .viewWillAppear(animated)
+        turnOn()
     }
 }
 
@@ -48,11 +61,12 @@ extension DeviceViewController: DeviceLayoutProtocol {
         let backBarButtonItem = UIBarButtonItem(image: UIImage(named: "ARROW ICON"),
                                                 style: .plain,
                                                 target: self,
-                                                action: #selector(self.goToInitialScreen))
+                                            action: #selector(self.goToInitialScreen))
         self.navigationItem.leftBarButtonItem = backBarButtonItem
     }
 
     internal func addViewLayout() {
+        addBackBarButtonItem()
         self.view.backgroundColor = UIColor.white
     }
 }
@@ -64,11 +78,11 @@ extension DeviceViewController: DeviceActionsProtocol {
         self.navigationController?.popViewController(animated: true)
     }
 
-    @objc internal func desligarAction() {
+    @objc internal func turnOff() {
         self.bluetoothPeriphericalManager?.powerOff()
     }
 
-    @objc internal func ligarAction() {
+    @objc internal func turnOn() {
         self.bluetoothPeriphericalManager?.powerOn()
     }
 }

@@ -15,27 +15,37 @@ protocol ListDeviceTableViewDataSourceProtocol {
     func verifyNumberOfSections() -> Int
 }
 
+protocol ListDeviceTableViewDelegateProtocol {
+    func didSelectedRow(at indexPath: IndexPath)
+}
+
 protocol ListDeviceTableViewLayoutProtocol {
-    func tableViewLayoutConfiguration()
+    func tableViewLayout()
     func applyLayout(on cell: UITableViewCell)
     func presentEmptyMessage(message: String, on tableView: UITableView)
 }
 
 protocol ListDeviceLayoutProtocol {
-    func viewLayoutConfiguration()
+    func viewLayout()
 }
 
-protocol ListDeviceNavigatorProtocol {
+protocol ListDeviceNavigationProtocol {
     func presentDeviceViewController(peripherical: CBPeripheral)
 }
 
 protocol ListDevicesActionsProtocol {
-    func startRefreshAction()
-    func stopRefreshAction()
+    func refreshButtonTouched()
 }
 
 class ListDevicesViewController: UIViewController {
-
+    
+     enum State {
+        case search
+        case searched(NSArray)
+        case connecting(String)
+        case error
+    }
+    
     // MARK: - IBOutlets
 
     @IBOutlet weak var tableView: UITableView!
@@ -50,7 +60,7 @@ class ListDevicesViewController: UIViewController {
     private lazy var refreshBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .refresh,
                                target: self,
-                               action: #selector(self.startRefreshAction))
+                               action: #selector(self.refreshButtonTouched))
     }
 
     private lazy var refreshIndicatorView = { () -> UIActivityIndicatorView in
@@ -63,20 +73,17 @@ class ListDevicesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViewLayoutConfiguration()
-        viewLayoutConfiguration()
         addProtocols()
-        addRefreshBarButtonItem()
+        tableViewLayout()
+        viewLayout()
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        bluetoothManager.desconnect()
-        tableView.reloadData()
-        startRefreshAction()
+        changeState(for: .search)
     }
 
     // MARK: - Private
-
+    
     private func addProtocols() {
         bluetoothManager.delegate = self
         tableView.dataSource = self
@@ -87,20 +94,44 @@ class ListDevicesViewController: UIViewController {
         navigationItem.setRightBarButton(refreshBarButtonItem(),
                                               animated: true)
     }
+    
+    // MARK: Public
+    
+    func changeState(for state: State) {
+        switch state {
+        case .search:
+            bluetoothManager.startSearchDevices()
+            navigationItem.rightBarButtonItem?.customView = refreshIndicatorView()
+            
+        case .searched(let devicesNames):
+            model = devicesNames
+            addRefreshBarButtonItem()
+            tableView.reloadData()
+            
+        case .connecting(let peripheralName):
+            let peripherical = bluetoothManager.connect(peripheralName)
+            presentDeviceViewController(peripherical: peripherical)
+            
+        case .error:
+            presentEmptyMessage(message: "deu bug\ne a culpa é do desenvolvedor \n\n 😭",
+                                on: tableView)
+        }
+    }
 }
 
 // MARK: ListDeviceLayoutProtocol
 
 extension ListDevicesViewController: ListDeviceLayoutProtocol {
-    internal func viewLayoutConfiguration() {
+    internal func viewLayout() {
         title = "Lampadas 💡"
         view.backgroundColor = UIColor(named: "Dark")
+        addRefreshBarButtonItem()
     }
 }
 
 // MARK: ListDeviceNavigatorProtocol
 
-extension ListDevicesViewController: ListDeviceNavigatorProtocol {
+extension ListDevicesViewController: ListDeviceNavigationProtocol {
     internal func presentDeviceViewController(peripherical: CBPeripheral) {
         let viewController = DeviceViewController()
         viewController.setup(peripherical: peripherical)
@@ -111,12 +142,7 @@ extension ListDevicesViewController: ListDeviceNavigatorProtocol {
 // MARK: ListDevicesActionsProtocol
 
 extension ListDevicesViewController: ListDevicesActionsProtocol {
-    @objc internal func startRefreshAction() {
-        bluetoothManager.startSearchDevices()
-        navigationItem.rightBarButtonItem?.customView = refreshIndicatorView()
-    }
-
-    internal func stopRefreshAction() {
-        addRefreshBarButtonItem()
+    @objc internal func refreshButtonTouched() {
+        changeState(for: .search)
     }
 }

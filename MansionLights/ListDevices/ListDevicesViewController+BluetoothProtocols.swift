@@ -12,8 +12,6 @@ import Foundation
 
 extension ListDevicesViewController: BluetoothManagerDelegate {
     func managerDidFoundDevices(devicesNames: NSArray) {
-        model = devicesNames
-        tableView.reloadData()
-        stopRefreshAction()
+        changeState(for: .searched(devicesNames))
     }
 }

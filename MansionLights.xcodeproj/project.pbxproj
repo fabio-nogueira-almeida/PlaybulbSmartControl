@@ -81,18 +81,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		D91219541F9B81AE00FD967A /* Classes */ = {
+		D91219541F9B81AE00FD967A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D9E20C431F981CFF00887249 /* AppDelegate.swift */,
-				D91219501F9B80B000FD967A /* BluetoothManager.swift */,
-				D9CB40031F9BA3AE00172EB0 /* BluetoothPeriphericalManager.swift */,
-				D9CB40011F9BA2CE00172EB0 /* DeviceViewController.swift */,
 				D91219521F9B817B00FD967A /* UIColor+Helper.swift */,
 				D9C4CF9920C70FC9004DBDAA /* UnicodeScalar+Helper.swift */,
 				D9C4CF9B20C71005004DBDAA /* Data+Helper.swift */,
 			);
-			path = Classes;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D9C46EA120CC848E008B3B6C /* ListDevices */ = {
@@ -103,6 +99,32 @@
 				D9C46E9F20CC80F7008B3B6C /* ListDeviceViewController+TableViewProtocols.swift */,
 			);
 			path = ListDevices;
+			sourceTree = "<group>";
+		};
+		D9C46EA220CC8D7F008B3B6C /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				D91219501F9B80B000FD967A /* BluetoothManager.swift */,
+				D9CB40031F9BA3AE00172EB0 /* BluetoothPeriphericalManager.swift */,
+			);
+			path = Bluetooth;
+			sourceTree = "<group>";
+		};
+		D9C46EA320CC8D9C008B3B6C /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				D9CB40011F9BA2CE00172EB0 /* DeviceViewController.swift */,
+			);
+			path = Device;
+			sourceTree = "<group>";
+		};
+		D9C46EA420CC8DD9008B3B6C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D9E20C4C1F981CFF00887249 /* LaunchScreen.storyboard */,
+				D9E20C471F981CFF00887249 /* Main.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		D9E20C371F981CFE00887249 = {
@@ -126,12 +148,14 @@
 		D9E20C421F981CFF00887249 /* MansionLights */ = {
 			isa = PBXGroup;
 			children = (
-				D9C46EA120CC848E008B3B6C /* ListDevices */,
-				D91219541F9B81AE00FD967A /* Classes */,
 				D9E20C4F1F981CFF00887249 /* Info.plist */,
+				D9E20C431F981CFF00887249 /* AppDelegate.swift */,
 				D9E20C4A1F981CFF00887249 /* Assets.xcassets */,
-				D9E20C4C1F981CFF00887249 /* LaunchScreen.storyboard */,
-				D9E20C471F981CFF00887249 /* Main.storyboard */,
+				D9C46EA220CC8D7F008B3B6C /* Bluetooth */,
+				D9C46EA320CC8D9C008B3B6C /* Device */,
+				D91219541F9B81AE00FD967A /* Extensions */,
+				D9C46EA120CC848E008B3B6C /* ListDevices */,
+				D9C46EA420CC8DD9008B3B6C /* View */,
 			);
 			path = MansionLights;
 			sourceTree = "<group>";
@@ -158,7 +182,7 @@
 				D9E20C3E1F981CFF00887249 /* Resources */,
 				165B3E4724338F42BBA991E2 /* [CP] Embed Pods Frameworks */,
 				560EAFF0F7CA6574CCE85C8A /* [CP] Copy Pods Resources */,
-				D944F2B11F9B8959007FF29D /* ShellScript */,
+				D944F2B11F9B8959007FF29D /* SwiftLint */,
 				D993AC8F1F9BEDAC00224F3A /* Embed Watch Content */,
 			);
 			buildRules = (
@@ -272,18 +296,19 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D944F2B11F9B8959007FF29D /* ShellScript */ = {
+		D944F2B11F9B8959007FF29D /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = SwiftLint;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "#if which swiftlint >/dev/null; then\n#swiftlint\n#else\n#echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

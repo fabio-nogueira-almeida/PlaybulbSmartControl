@@ -31,6 +31,7 @@ extension ListDevicesViewController: UITableViewDataSource {
         if let name = model?.object(at: indexPath.row) as? String? {
             cell.textLabel?.text = name
         }
+        
         applyLayout(on: cell)
 
         return cell
@@ -47,10 +48,7 @@ extension ListDevicesViewController: UITableViewDataSource {
 extension ListDevicesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
-        if let model = model?.object(at: indexPath.row) as? String?,
-            let peripherical = bluetoothManager.connect(model!) {
-            presentDeviceViewController(peripherical: peripherical)
-        }
+        didSelectedRow(at: indexPath)
     }
 }
 
@@ -58,7 +56,7 @@ extension ListDevicesViewController: UITableViewDelegate {
 
 extension ListDevicesViewController: ListDeviceTableViewLayoutProtocol {
 
-    internal func tableViewLayoutConfiguration() {
+    internal func tableViewLayout() {
         tableView.backgroundColor = UIColor(named: "Dark")
         tableView.tableFooterView = UIView()
     }
@@ -89,14 +87,24 @@ extension ListDevicesViewController: ListDeviceTableViewLayoutProtocol {
 }
 
 extension ListDevicesViewController: ListDeviceTableViewDataSourceProtocol {
-    func verifyNumberOfSections() -> Int {
-        var numberOfSection = 1
-        if (model == nil) &&
-            (model?.count == 0) {
-            presentEmptyMessage(message: "parece que elas estao desligadas \n\n 💡 😭",
+    internal func verifyNumberOfSections() -> Int {
+        if model == nil || model?.count == 0 {
+            presentEmptyMessage(message: "parece que estão desligadas \n\n 💡 😭",
                                 on: tableView)
-            numberOfSection = 0
+            return 0
         }
-        return numberOfSection
+        
+        return 1
+    }
+}
+
+extension ListDevicesViewController: ListDeviceTableViewDelegateProtocol {
+    internal func didSelectedRow(at indexPath: IndexPath) {
+        guard let peripheralName = model?.object(at: indexPath.row) as? String else {
+            changeState(for: .error)
+            return
+        }
+        
+        changeState(for: .connecting(peripheralName))
     }
 }
