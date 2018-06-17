@@ -15,10 +15,6 @@ protocol BluetoothManagerDelegate: class {
 
 class BluetoothManager: NSObject {
 
-    // MARK: - Constants
-    
-    let serviceUIID = "FF0D"
-
     // MARK: - Properties
     
     var manager: CBCentralManager
@@ -39,7 +35,7 @@ class BluetoothManager: NSObject {
     
     func startSearchDevices() {
         self.cleanPeripherals()
-        self.manager.scanForPeripherals(withServices: [CBUUID(string: serviceUIID)],
+        self.manager.scanForPeripherals(withServices: [CBUUID(string: .serviceUIID)],
                                                options: nil)
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.stopSearchPeripherals()
@@ -134,4 +130,8 @@ extension BluetoothManager: CBCentralManagerDelegate {
             peripheral.discoverCharacteristics(nil, for: service)
         }
     }
+}
+
+fileprivate extension String {
+    static let serviceUIID = "FF0D"
 }

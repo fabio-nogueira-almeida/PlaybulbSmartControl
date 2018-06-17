@@ -29,7 +29,7 @@ protocol ListDeviceLayoutProtocol {
     func viewLayout()
 }
 
-protocol ListDeviceNavigationProtocol {
+protocol ListDeviceCoordinatorProtocol {
     func presentDeviceViewController(peripherical: CBPeripheral)
 }
 
@@ -37,7 +37,7 @@ protocol ListDevicesActionsProtocol {
     func refreshButtonTouched()
 }
 
-class ListDevicesViewController: UIViewController {
+final class ListDevicesViewController: UIViewController {
     
      enum State {
         case search
@@ -113,7 +113,7 @@ class ListDevicesViewController: UIViewController {
             presentDeviceViewController(peripherical: peripherical)
             
         case .error:
-            presentEmptyMessage(message: "deu bug\ne a culpa é do desenvolvedor \n\n 😭",
+            presentEmptyMessage(message: .errorMessage,
                                 on: tableView)
         }
     }
@@ -123,15 +123,15 @@ class ListDevicesViewController: UIViewController {
 
 extension ListDevicesViewController: ListDeviceLayoutProtocol {
     internal func viewLayout() {
-        title = "Lampadas 💡"
-        view.backgroundColor = UIColor(named: "Dark")
+        title = .title
+        view.backgroundColor = UIColor(named: .dark)
         addRefreshBarButtonItem()
     }
 }
 
 // MARK: ListDeviceNavigatorProtocol
 
-extension ListDevicesViewController: ListDeviceNavigationProtocol {
+extension ListDevicesViewController: ListDeviceCoordinatorProtocol {
     internal func presentDeviceViewController(peripherical: CBPeripheral) {
         let viewController = DeviceViewController()
         viewController.setup(peripherical: peripherical)
@@ -145,4 +145,11 @@ extension ListDevicesViewController: ListDevicesActionsProtocol {
     @objc internal func refreshButtonTouched() {
         changeState(for: .search)
     }
+}
+
+// MARK: Strings Extesions
+
+fileprivate extension String {
+    static let title = "Lampadas 💡"
+    static let errorMessage = "deu bug\ne a culpa é do desenvolvedor \n\n 😭"
 }

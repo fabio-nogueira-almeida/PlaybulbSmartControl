@@ -9,9 +9,14 @@
 import UIKit
 import CoreBluetooth
 
+// MARK: Protocol
+
 protocol BluetoothPeriphericalManagerAPIProtocol {
-    func powerOn()
-    func powerOff()
+    func powerOnMode()
+    func powerOffMode()
+    func whiteMode()
+    func sexyMode()
+    func readMode()
 }
 
 protocol BluetoothPeriphericalManagerProtocol {
@@ -68,12 +73,24 @@ extension BluetoothPeriphericalManager: CBPeripheralDelegate {
 // MARK: BluetoothPeriphericalManagerAPIProtocol
 
 extension BluetoothPeriphericalManager: BluetoothPeriphericalManagerAPIProtocol {
-    func powerOn() {
-        changeColor(colorHex: UIColor.white.hex)
+    func powerOnMode() {
+        changeColor(colorHex: "ff000000")
     }
 
-    func powerOff() {
-        changeColor(colorHex: UIColor.black.hex)
+    func powerOffMode() {
+        changeColor(colorHex: "00000000")
+    }
+
+    func whiteMode() {
+        changeColor(colorHex: "88FFFFFF")
+    }
+    
+    func sexyMode() {
+        changeColor(colorHex: "00ff0000")
+    }
+    
+    func readMode() {
+        changeColor(colorHex: "26000000")
     }
 }
 
@@ -82,6 +99,8 @@ extension BluetoothPeriphericalManager: BluetoothPeriphericalManagerAPIProtocol 
 extension BluetoothPeriphericalManager: BluetoothPeriphericalManagerProtocol {
     func colorCharacteristic() -> CBCharacteristic {
         let array = self.characteristics as? [CBCharacteristic]
+        // TODO: Add Loading
+        // TODO: Add guard statement
         return (array!.filter {$0.uuid == CBUUID(string: colorCharacteristicUIID)}.first)!
     }
 

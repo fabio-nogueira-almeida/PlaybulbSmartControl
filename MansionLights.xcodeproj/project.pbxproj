@@ -12,6 +12,9 @@
 		D91219531F9B817B00FD967A /* UIColor+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91219521F9B817B00FD967A /* UIColor+Helper.swift */; };
 		D91219581F9B829D00FD967A /* ListDevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91219571F9B829D00FD967A /* ListDevicesViewController.swift */; };
 		D92883C01F997E9A00BBA134 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9E20C561F981D9400887249 /* CoreBluetooth.framework */; };
+		D93A9F0C20D601FA0097DE5C /* MansionLightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93A9F0B20D601FA0097DE5C /* MansionLightsTests.swift */; };
+		D93A9F1420D604EC0097DE5C /* Strings+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93A9F1320D604EC0097DE5C /* Strings+Helper.swift */; };
+		D93A9F1620D615430097DE5C /* DeviceViewController+TableViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93A9F1520D615430097DE5C /* DeviceViewController+TableViewProtocol.swift */; };
 		D9C46E9E20CC80D0008B3B6C /* ListDevicesViewController+BluetoothProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C46E9D20CC80D0008B3B6C /* ListDevicesViewController+BluetoothProtocols.swift */; };
 		D9C46EA020CC80F7008B3B6C /* ListDeviceViewController+TableViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C46E9F20CC80F7008B3B6C /* ListDeviceViewController+TableViewProtocols.swift */; };
 		D9C4CF9A20C70FC9004DBDAA /* UnicodeScalar+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C4CF9920C70FC9004DBDAA /* UnicodeScalar+Helper.swift */; };
@@ -22,7 +25,18 @@
 		D9E20C491F981CFF00887249 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9E20C471F981CFF00887249 /* Main.storyboard */; };
 		D9E20C4B1F981CFF00887249 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9E20C4A1F981CFF00887249 /* Assets.xcassets */; };
 		D9E20C4E1F981CFF00887249 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9E20C4C1F981CFF00887249 /* LaunchScreen.storyboard */; };
+		E96ECE4D4D183E0C26022DB3 /* Pods_MansionLightsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE058543CAC9EC8786E19AD7 /* Pods_MansionLightsTests.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D93A9F0E20D601FA0097DE5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D9E20C381F981CFE00887249 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D9E20C3F1F981CFF00887249;
+			remoteInfo = MansionLights;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		D993AC8F1F9BEDAC00224F3A /* Embed Watch Content */ = {
@@ -39,11 +53,18 @@
 
 /* Begin PBXFileReference section */
 		3BF4D1CB3862CED26DCFC65F /* Pods-MansionLights.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MansionLights.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MansionLights/Pods-MansionLights.debug.xcconfig"; sourceTree = "<group>"; };
+		43E08D402965A9E4E7DCDB10 /* Pods-MansionLightsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MansionLightsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MansionLightsTests/Pods-MansionLightsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		53B4F7A04EB709E962CD7AAE /* Pods_MansionLights.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MansionLights.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AFBE1CF3A5ADF0351D41124 /* Pods-MansionLights.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MansionLights.release.xcconfig"; path = "Pods/Target Support Files/Pods-MansionLights/Pods-MansionLights.release.xcconfig"; sourceTree = "<group>"; };
+		849E5EB5EA53A5824F25A139 /* Pods-MansionLightsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MansionLightsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MansionLightsTests/Pods-MansionLightsTests.release.xcconfig"; sourceTree = "<group>"; };
 		D91219501F9B80B000FD967A /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		D91219521F9B817B00FD967A /* UIColor+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Helper.swift"; sourceTree = "<group>"; };
 		D91219571F9B829D00FD967A /* ListDevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDevicesViewController.swift; sourceTree = "<group>"; };
+		D93A9F0920D601F90097DE5C /* MansionLightsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MansionLightsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D93A9F0B20D601FA0097DE5C /* MansionLightsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MansionLightsTests.swift; sourceTree = "<group>"; };
+		D93A9F0D20D601FA0097DE5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D93A9F1320D604EC0097DE5C /* Strings+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+Helper.swift"; sourceTree = "<group>"; };
+		D93A9F1520D615430097DE5C /* DeviceViewController+TableViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeviceViewController+TableViewProtocol.swift"; sourceTree = "<group>"; };
 		D9C46E9D20CC80D0008B3B6C /* ListDevicesViewController+BluetoothProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListDevicesViewController+BluetoothProtocols.swift"; sourceTree = "<group>"; };
 		D9C46E9F20CC80F7008B3B6C /* ListDeviceViewController+TableViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListDeviceViewController+TableViewProtocols.swift"; sourceTree = "<group>"; };
 		D9C4CF9920C70FC9004DBDAA /* UnicodeScalar+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnicodeScalar+Helper.swift"; sourceTree = "<group>"; };
@@ -57,9 +78,18 @@
 		D9E20C4D1F981CFF00887249 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D9E20C4F1F981CFF00887249 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9E20C561F981D9400887249 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		EE058543CAC9EC8786E19AD7 /* Pods_MansionLightsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MansionLightsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D93A9F0620D601F90097DE5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E96ECE4D4D183E0C26022DB3 /* Pods_MansionLightsTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D9E20C3D1F981CFF00887249 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -77,6 +107,8 @@
 			children = (
 				3BF4D1CB3862CED26DCFC65F /* Pods-MansionLights.debug.xcconfig */,
 				7AFBE1CF3A5ADF0351D41124 /* Pods-MansionLights.release.xcconfig */,
+				43E08D402965A9E4E7DCDB10 /* Pods-MansionLightsTests.debug.xcconfig */,
+				849E5EB5EA53A5824F25A139 /* Pods-MansionLightsTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -87,8 +119,18 @@
 				D91219521F9B817B00FD967A /* UIColor+Helper.swift */,
 				D9C4CF9920C70FC9004DBDAA /* UnicodeScalar+Helper.swift */,
 				D9C4CF9B20C71005004DBDAA /* Data+Helper.swift */,
+				D93A9F1320D604EC0097DE5C /* Strings+Helper.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D93A9F0A20D601FA0097DE5C /* MansionLightsTests */ = {
+			isa = PBXGroup;
+			children = (
+				D93A9F0B20D601FA0097DE5C /* MansionLightsTests.swift */,
+				D93A9F0D20D601FA0097DE5C /* Info.plist */,
+			);
+			path = MansionLightsTests;
 			sourceTree = "<group>";
 		};
 		D9C46EA120CC848E008B3B6C /* ListDevices */ = {
@@ -114,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				D9CB40011F9BA2CE00172EB0 /* DeviceViewController.swift */,
+				D93A9F1520D615430097DE5C /* DeviceViewController+TableViewProtocol.swift */,
 			);
 			path = Device;
 			sourceTree = "<group>";
@@ -131,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				D9E20C421F981CFF00887249 /* MansionLights */,
+				D93A9F0A20D601FA0097DE5C /* MansionLightsTests */,
 				D9E20C411F981CFF00887249 /* Products */,
 				D9E20C551F981D9400887249 /* Frameworks */,
 				9ABA2E2D5CF204DF269D7860 /* Pods */,
@@ -141,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				D9E20C401F981CFF00887249 /* MansionLights.app */,
+				D93A9F0920D601F90097DE5C /* MansionLightsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -165,6 +210,7 @@
 			children = (
 				D9E20C561F981D9400887249 /* CoreBluetooth.framework */,
 				53B4F7A04EB709E962CD7AAE /* Pods_MansionLights.framework */,
+				EE058543CAC9EC8786E19AD7 /* Pods_MansionLightsTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -172,6 +218,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D93A9F0820D601F90097DE5C /* MansionLightsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D93A9F1220D601FA0097DE5C /* Build configuration list for PBXNativeTarget "MansionLightsTests" */;
+			buildPhases = (
+				BA504FDA29CB38DAAE4A0AC9 /* [CP] Check Pods Manifest.lock */,
+				D93A9F0520D601F90097DE5C /* Sources */,
+				D93A9F0620D601F90097DE5C /* Frameworks */,
+				D93A9F0720D601F90097DE5C /* Resources */,
+				E71E2B2CFAD5DA3BB5BFFC36 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D93A9F0F20D601FA0097DE5C /* PBXTargetDependency */,
+			);
+			name = MansionLightsTests;
+			productName = MansionLightsTests;
+			productReference = D93A9F0920D601F90097DE5C /* MansionLightsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D9E20C3F1F981CFF00887249 /* MansionLights */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9E20C521F981CFF00887249 /* Build configuration list for PBXNativeTarget "MansionLights" */;
@@ -180,8 +246,6 @@
 				D9E20C3C1F981CFF00887249 /* Sources */,
 				D9E20C3D1F981CFF00887249 /* Frameworks */,
 				D9E20C3E1F981CFF00887249 /* Resources */,
-				165B3E4724338F42BBA991E2 /* [CP] Embed Pods Frameworks */,
-				560EAFF0F7CA6574CCE85C8A /* [CP] Copy Pods Resources */,
 				D944F2B11F9B8959007FF29D /* SwiftLint */,
 				D993AC8F1F9BEDAC00224F3A /* Embed Watch Content */,
 			);
@@ -200,10 +264,15 @@
 		D9E20C381F981CFE00887249 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Fábio Nogueira de Almeida";
 				TargetAttributes = {
+					D93A9F0820D601F90097DE5C = {
+						CreatedOnToolsVersion = 10.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = D9E20C3F1F981CFF00887249;
+					};
 					D9E20C3F1F981CFF00887249 = {
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 1000;
@@ -230,11 +299,19 @@
 			projectRoot = "";
 			targets = (
 				D9E20C3F1F981CFF00887249 /* MansionLights */,
+				D93A9F0820D601F90097DE5C /* MansionLightsTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D93A9F0720D601F90097DE5C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D9E20C3E1F981CFF00887249 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -248,36 +325,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		165B3E4724338F42BBA991E2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MansionLights/Pods-MansionLights-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		560EAFF0F7CA6574CCE85C8A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MansionLights/Pods-MansionLights-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B458A528F0104F19CFB70A33 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -290,6 +337,24 @@
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-MansionLights-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA504FDA29CB38DAAE4A0AC9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MansionLightsTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -310,9 +375,35 @@
 			shellPath = /bin/sh;
 			shellScript = "#if which swiftlint >/dev/null; then\n#swiftlint\n#else\n#echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi\n";
 		};
+		E71E2B2CFAD5DA3BB5BFFC36 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MansionLightsTests/Pods-MansionLightsTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MansionLightsTests/Pods-MansionLightsTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D93A9F0520D601F90097DE5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D93A9F0C20D601FA0097DE5C /* MansionLightsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D9E20C3C1F981CFF00887249 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -321,9 +412,11 @@
 				D91219531F9B817B00FD967A /* UIColor+Helper.swift in Sources */,
 				D9C4CF9A20C70FC9004DBDAA /* UnicodeScalar+Helper.swift in Sources */,
 				D9C46E9E20CC80D0008B3B6C /* ListDevicesViewController+BluetoothProtocols.swift in Sources */,
+				D93A9F1420D604EC0097DE5C /* Strings+Helper.swift in Sources */,
 				D9CB40021F9BA2CE00172EB0 /* DeviceViewController.swift in Sources */,
 				D9C4CF9C20C71005004DBDAA /* Data+Helper.swift in Sources */,
 				D9C46EA020CC80F7008B3B6C /* ListDeviceViewController+TableViewProtocols.swift in Sources */,
+				D93A9F1620D615430097DE5C /* DeviceViewController+TableViewProtocol.swift in Sources */,
 				D91219511F9B80B000FD967A /* BluetoothManager.swift in Sources */,
 				D9CB40041F9BA3AE00172EB0 /* BluetoothPeriphericalManager.swift in Sources */,
 				D9E20C441F981CFF00887249 /* AppDelegate.swift in Sources */,
@@ -331,6 +424,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D93A9F0F20D601FA0097DE5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D9E20C3F1F981CFF00887249 /* MansionLights */;
+			targetProxy = D93A9F0E20D601FA0097DE5C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D9E20C471F981CFF00887249 /* Main.storyboard */ = {
@@ -352,6 +453,45 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D93A9F1020D601FA0097DE5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43E08D402965A9E4E7DCDB10 /* Pods-MansionLightsTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C7Q44C43S9;
+				INFOPLIST_FILE = MansionLightsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				PRODUCT_BUNDLE_IDENTIFIER = nogueira.fabio.MansionLightsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MansionLights.app/MansionLights";
+			};
+			name = Debug;
+		};
+		D93A9F1120D601FA0097DE5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 849E5EB5EA53A5824F25A139 /* Pods-MansionLightsTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C7Q44C43S9;
+				INFOPLIST_FILE = MansionLightsTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = nogueira.fabio.MansionLightsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MansionLights.app/MansionLights";
+			};
+			name = Release;
+		};
 		D9E20C501F981CFF00887249 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -504,6 +644,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D93A9F1220D601FA0097DE5C /* Build configuration list for PBXNativeTarget "MansionLightsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D93A9F1020D601FA0097DE5C /* Debug */,
+				D93A9F1120D601FA0097DE5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D9E20C3B1F981CFE00887249 /* Build configuration list for PBXProject "MansionLights" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

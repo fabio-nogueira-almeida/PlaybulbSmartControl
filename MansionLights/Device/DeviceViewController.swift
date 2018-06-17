@@ -9,6 +9,14 @@
 import UIKit
 import CoreBluetooth
 
+// MARK: Protocols
+
+protocol TableViewConfiguration {
+    func tableViewProtocol()
+    func tableViewLayout()
+    func applyLayout(on cell: UITableViewCell)
+}
+
 protocol DeviceLayoutProtocol {
     func addViewLayout()
     func addBackBarButtonItem()
@@ -16,22 +24,59 @@ protocol DeviceLayoutProtocol {
 
 protocol DeviceActionsProtocol {
     func goToInitialScreen()
-    func turnOff()
-    func turnOn()
 }
 
-// TODO: Add datasource with lines of options,
-// TODO: turn on,
-// TODO: turn off,
-// TODO: red color,
-// TODO: read color,
-// TODO: opacity
+enum State: CaseIterable {
+    case On
+    case Off
+    case White
+    case Sexy
+    case Reading
+    
+    func title() -> String {
+        switch self {
+        case .On:
+            return .turnOn
+            
+        case .Off:
+            return .turnOff
+            
+        case .White:
+            return .white
+            
+        case .Sexy:
+            return .sexy
+            
+        case .Reading:
+            return .reading
+        }
+    }
+    
+    func action(on peripherical: BluetoothPeriphericalManager) {
+        switch self {
+        case .On:
+            peripherical.powerOnMode()
+            
+        case .Off:
+            peripherical.powerOffMode()
 
-class DeviceViewController: UIViewController {
+        case .White:
+            peripherical.whiteMode()
+            
+        case .Sexy:
+            peripherical.sexyMode()
+            
+        case .Reading:
+            peripherical.readMode()
+        }
+    }
+}
+
+final class DeviceViewController: UITableViewController {
 
     // MARK: Properties
 
-    var bluetoothPeriphericalManager: BluetoothPeriphericalManager?
+    internal var bluetoothPeriphericalManager: BluetoothPeriphericalManager?
 
     // MARK: - Initialize
 
@@ -39,6 +84,7 @@ class DeviceViewController: UIViewController {
         self.bluetoothPeriphericalManager =
             BluetoothPeriphericalManager(peripherical: peripherical)
         self.bluetoothPeriphericalManager?.setup()
+        self.title = peripherical.name! + " 💡"
     }
 
     // MARK: - Lifecycle
@@ -46,11 +92,12 @@ class DeviceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addViewLayout()
+        tableViewProtocol()
+        tableViewLayout()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super .viewWillAppear(animated)
-        turnOn()
+    override func viewWillDisappear(_ animated: Bool) {
+        // TODO: Desabilitar lampada
     }
 }
 
@@ -77,12 +124,36 @@ extension DeviceViewController: DeviceActionsProtocol {
     @objc internal func goToInitialScreen() {
         self.navigationController?.popViewController(animated: true)
     }
+}
 
-    @objc internal func turnOff() {
-        self.bluetoothPeriphericalManager?.powerOff()
-    }
+// MARK: UITableViewConfiguration
 
-    @objc internal func turnOn() {
-        self.bluetoothPeriphericalManager?.powerOn()
+extension DeviceViewController: TableViewConfiguration {
+    internal func tableViewProtocol() {
+        tableView.dataSource = self
+        tableView.delegate = self
     }
+    
+    internal func tableViewLayout() {
+        self.tableView.backgroundColor = UIColor(named: .dark)
+    }
+    
+    
+    internal func applyLayout(on cell: UITableViewCell) {
+        cell.backgroundColor = UIColor(named: .dark)
+        
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(named: .purple)
+        cell.selectedBackgroundView = bgColorView
+        
+        cell.textLabel?.textColor = .white
+    }
+}
+
+extension String {
+    static let turnOn = "Acender"
+    static let turnOff = "Apagar"
+    static let white = "Branca"
+    static let sexy = "Sexo"
+    static let reading = "Leitura"
 }

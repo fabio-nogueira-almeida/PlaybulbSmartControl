@@ -1,0 +1,6 @@
+framework module Pods_MansionLightsTests {
+  umbrella header "Pods-MansionLightsTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

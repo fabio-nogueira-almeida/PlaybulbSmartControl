@@ -57,15 +57,15 @@ extension ListDevicesViewController: UITableViewDelegate {
 extension ListDevicesViewController: ListDeviceTableViewLayoutProtocol {
 
     internal func tableViewLayout() {
-        tableView.backgroundColor = UIColor(named: "Dark")
+        tableView.backgroundColor = UIColor(named: .dark)
         tableView.tableFooterView = UIView()
     }
 
     internal func applyLayout(on cell: UITableViewCell) {
-        cell.backgroundColor = UIColor(named: "Dark")
+        cell.backgroundColor = UIColor(named: .dark)
 
         let bgColorView = UIView()
-        bgColorView.backgroundColor = UIColor(named: "Green")
+        bgColorView.backgroundColor = UIColor(named: .green)
         cell.selectedBackgroundView = bgColorView
 
         cell.textLabel?.textColor = .white
@@ -88,8 +88,8 @@ extension ListDevicesViewController: ListDeviceTableViewLayoutProtocol {
 
 extension ListDevicesViewController: ListDeviceTableViewDataSourceProtocol {
     internal func verifyNumberOfSections() -> Int {
-        if model == nil || model?.count == 0 {
-            presentEmptyMessage(message: "parece que estão desligadas \n\n 💡 😭",
+        if model?.count == 0 {
+            presentEmptyMessage(message: .emptyMessage,
                                 on: tableView)
             return 0
         }
@@ -107,4 +107,8 @@ extension ListDevicesViewController: ListDeviceTableViewDelegateProtocol {
         
         changeState(for: .connecting(peripheralName))
     }
+}
+
+fileprivate extension String {
+    static let emptyMessage = "parece que estão desligadas \n\n 💡 😭"
 }
