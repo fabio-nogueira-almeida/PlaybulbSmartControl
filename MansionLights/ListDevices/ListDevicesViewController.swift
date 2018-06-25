@@ -79,6 +79,7 @@ final class ListDevicesViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        bluetoothManager.desconnect()
         changeState(for: .search)
     }
 
@@ -102,11 +103,13 @@ final class ListDevicesViewController: UIViewController {
         case .search:
             bluetoothManager.startSearchDevices()
             navigationItem.rightBarButtonItem?.customView = refreshIndicatorView()
+            tableView.isHidden = true
             
         case .searched(let devicesNames):
             model = devicesNames
             addRefreshBarButtonItem()
             tableView.reloadData()
+            tableView.isHidden = false
             
         case .connecting(let peripheralName):
             let peripherical = bluetoothManager.connect(peripheralName)

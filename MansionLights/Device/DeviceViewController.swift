@@ -74,6 +74,14 @@ enum State: CaseIterable {
 
 final class DeviceViewController: UITableViewController {
 
+    // MARK: - Properties Lazy
+    
+    private lazy var refreshIndicatorView = { () -> UIActivityIndicatorView in
+        let indicatorView = UIActivityIndicatorView(activityIndicatorStyle: .white)
+        indicatorView.startAnimating()
+        return indicatorView
+    }
+    
     // MARK: Properties
 
     internal var bluetoothPeriphericalManager: BluetoothPeriphericalManager?
@@ -84,6 +92,7 @@ final class DeviceViewController: UITableViewController {
         self.bluetoothPeriphericalManager =
             BluetoothPeriphericalManager(peripherical: peripherical)
         self.bluetoothPeriphericalManager?.setup()
+        self.bluetoothPeriphericalManager?.delegate = self
         self.title = peripherical.name! + " 💡"
     }
 
@@ -94,10 +103,10 @@ final class DeviceViewController: UITableViewController {
         addViewLayout()
         tableViewProtocol()
         tableViewLayout()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        // TODO: Desabilitar lampada
+        navigationItem.setRightBarButton(UIBarButtonItem(),
+                                         animated: true)
+        navigationItem.rightBarButtonItem?.customView = refreshIndicatorView()
+        self.tableView.isHidden = true
     }
 }
 
@@ -147,6 +156,14 @@ extension DeviceViewController: TableViewConfiguration {
         cell.selectedBackgroundView = bgColorView
         
         cell.textLabel?.textColor = .white
+    }
+}
+
+extension DeviceViewController: BluetoothPeriphericalManagerDelegate {
+    func didFinishTheDiscovery() {
+        self.tableView.reloadData()
+        self.tableView.isHidden = false
+        navigationItem.rightBarButtonItem?.customView = nil
     }
 }
 

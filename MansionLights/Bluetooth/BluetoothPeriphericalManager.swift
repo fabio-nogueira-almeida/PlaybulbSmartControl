@@ -11,6 +11,10 @@ import CoreBluetooth
 
 // MARK: Protocol
 
+protocol BluetoothPeriphericalManagerDelegate {
+    func didFinishTheDiscovery()
+}
+
 protocol BluetoothPeriphericalManagerAPIProtocol {
     func powerOnMode()
     func powerOffMode()
@@ -32,6 +36,8 @@ class BluetoothPeriphericalManager: NSObject {
 
     // MARK: - Properties
 
+    var delegate: BluetoothPeriphericalManagerDelegate?
+    
     var peripherical: CBPeripheral
     var characteristics: NSMutableArray = []
 
@@ -67,6 +73,7 @@ extension BluetoothPeriphericalManager: CBPeripheralDelegate {
         for characteristic in service.characteristics! {
             self.characteristics.add(characteristic)
         }
+        self.delegate?.didFinishTheDiscovery()
     }
 }
 
